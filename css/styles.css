@@ -654,7 +654,6 @@ body {
   width: calc((100% - var(--indent) * 2) / 3);
 }
 
-
 .portfolio-works-item-link {
   display: block;
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -698,14 +697,11 @@ body {
 
 .portfolio-works-overlay-label {
   color: var(--cloud);
-  
 }
 
 .portfolio-works-item:hover .portfolio-works-overlay {
   transform: translateY(0);
 }
-
-
 
 .portfolio-works-header {
   font-weight: 500;
@@ -730,16 +726,26 @@ body {
 
 .backdrop {
   position: fixed;
-  visibility: hidden;
+
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 
-  
+  transition: opacity 500ms ease, visibility 500ms ease;
 }
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .modal {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 
   width: 458px;
   min-height: 576px;
@@ -749,7 +755,15 @@ body {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+
+  transition: transform 500ms ease, opacity 500ms ease; 
 }
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0;
+}
+
 .modal-btn {
   display: block;
   margin-left: auto;
